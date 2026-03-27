@@ -51,7 +51,17 @@ def chat(request: ChatRequest):
         resources=resources
     )
 
+    cleaned_resources = []
+    for r in resources:
+        cleaned_resources.append({
+            "name": r["name"],
+            "type": r["type"],
+            "description": r["description"],
+            "url": r["url"],
+            "why_matched": r["why_matched"]
+        })
+
     return {
         "answer": answer,
-        "resources": resources
+        "resources": cleaned_resources
     }
