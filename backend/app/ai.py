@@ -102,7 +102,7 @@ def generate_ai_answer(prompt):
 
     return response.choices[0].message.content
 
-def generate_chat_response(year, major, question, resources):
+def generate_chat_response(year, major, question, resources, history = None):
     prompt = build_prompt(year, major, question, resources, history)
     answer = generate_ai_answer(prompt)
     return answer
