@@ -20,3 +20,4 @@ Write in clear readable paragraphs.
 Do not use markdown symbols like ###, **, or bullet lists.
 Do not use markdown symbols like ###, **, -, or numbered lists.
 Write in clean readable paragraphs.
+Use line break between sections.

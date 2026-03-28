@@ -107,5 +107,4 @@ def generate_ai_answer(prompt):
 def generate_chat_response(year, major, question, resources, history = None):
     prompt = build_prompt(year, major, question, resources, history)
     answer = generate_ai_answer(prompt)
-    answer = answer.replace("\n", "<br>")
     return answer
