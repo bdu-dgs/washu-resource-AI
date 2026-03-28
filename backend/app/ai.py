@@ -13,10 +13,11 @@ def format_resources_for_prompt(resources):
     for i, r in enumerate(resources, start=1):
         block = (
             f"Resource {i}:\n"
-            f"Name: {r.get('name','')}\n"
-            f"Type: {r.get('type','')}\n"
-            f"Description: {r.get('description','')}\n"
-            f"Why matched: {r.get('why_matched','')}"
+            f"Name: {r.get('name', '')}\n"
+            f"Type: {r.get('type', '')}\n"
+            f"Description: {r.get('description', '')}\n"
+            f"URL: {r.get('url', '')}\n"
+            f"Why matched: {r.get('why_matched', '')}"
         )
         lines.append(block)
 
