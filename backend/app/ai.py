@@ -11,13 +11,15 @@ def format_resources_for_prompt(resources):
     lines = []
 
     for i, r in enumerate(resources, start=1):
-        lines.append(
-            f"{i}. Name: {r['name']}\n"
-            f"Type: {r['type']}\n"
-            f"Description: {r['description']}\n"
-            f"URL: {r['url']}\n"
-            f"Why matched: {r['why_matched']}\n"
+        block = (
+            f"Resource {i}:\n"
+            f"Name: {r.get('name','')}\n"
+            f"Type: {r.get('type','')}\n"
+            f"Description: {r.get('description','')}\n"
+            f"URL: {r.get('url','')}\n"
+            f"Why matched: {r.get('why_matched','')}"
         )
+        lines.append(block)
 
     return "\n\n".join(lines)
 
@@ -105,4 +107,5 @@ def generate_ai_answer(prompt):
 def generate_chat_response(year, major, question, resources, history = None):
     prompt = build_prompt(year, major, question, resources, history)
     answer = generate_ai_answer(prompt)
+    answer = answer.replace("\n", "<br>")
     return answer
