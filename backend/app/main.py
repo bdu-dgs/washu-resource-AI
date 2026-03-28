@@ -3,8 +3,17 @@ from app.schemas import ChatRequest, SearchResponse, ChatResponse
 from app.crud import search_all_resources
 from app.db import get_connection
 from app.ai import generate_chat_response
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/debug-openapi")
 def debug_openapi():
