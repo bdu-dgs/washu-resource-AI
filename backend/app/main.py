@@ -53,11 +53,13 @@ def search(request: ChatRequest):
 @app.post("/chat")
 def chat(request: ChatRequest):
     resources = search_all_resources(request.question)
+
     answer = generate_chat_response(
         year=request.year,
         major=request.major,
         question=request.question,
-        resources=resources
+        resources=resources,
+        history=request.history
     )
 
     cleaned_resources = []

@@ -19,35 +19,68 @@ def format_resources_for_prompt(resources):
             f"Why matched: {r['why_matched']}\n"
         )
 
-    return "\n".join(lines)
+    return "\n\n".join(lines)
 
-def build_prompt(year, major, question, resources):
+def build_prompt(year, major, question, resources, history = None):
     resources_text = format_resources_for_prompt(resources)
 
-    prompt = f"""
+    
+    if history:
+        prompt = f"""
 You are a helpful WashU student resource assistant.
 
-Your job is to help a student based only on the database results provided below.
-Do not make up any resources that are not in the retrieved results.
+This is a follow-up question from the student.
+
+Previous answer:
+{history}
 
 Student info:
 - Year: {year}
 - Major: {major}
 
-Student question:
+Follow-up question:
 {question}
 
 Retrieved database resources:
 {resources_text}
 
 Please do the following:
-1. Recommend the most relevant resources.
-2. Explain briefly why each resource is relevant to this student.
-3. Suggest practical next steps.
-4. Include the URL for each recommended resource.
+1. Answer the follow-up question.
+2. Do NOT repeat the full previous answer.
+3. Provide new details, clarification, or next steps.
+4. Only use resources listed above.
 
 Return your answer in clear English.
 """
+    else:
+        prompt = f"""
+    You are a helpful WashU student resource assistant.
+
+    our job is to help a student based only on the database results provided below.
+    Do not make up any resources that are not in the retrieved results.
+    Do not make up any information that is not in the student's question.
+    Do not make up any information that is not in the student's year or major.
+    Do not make up any information that is not in the student's history.
+
+    Student info:
+    - Year: {year}
+    - Major: {major}
+
+    Student question:
+    {question}
+
+    Retrieved database resources:
+    {resources_text}
+
+    Please do the following:
+    1. Recommend the most relevant resources.
+    2. Explain briefly why each resource is relevant to this student.
+    3. Suggest practical next steps.
+    4. Include the URL for each recommended resource.
+
+    Return your answer in clear English.
+    """
+
     return prompt
 
 
@@ -70,6 +103,6 @@ def generate_ai_answer(prompt):
     return response.choices[0].message.content
 
 def generate_chat_response(year, major, question, resources):
-    prompt = build_prompt(year, major, question, resources)
+    prompt = build_prompt(year, major, question, resources, history)
     answer = generate_ai_answer(prompt)
     return answer

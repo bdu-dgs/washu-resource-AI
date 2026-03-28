@@ -1,11 +1,13 @@
 from pydantic import BaseModel
 from typing import List
+from typing import Optional
 
 
 class ChatRequest(BaseModel):
     year: str
     major: str
     question: str
+    history: Optional[str] = None
 
 
 class ResourceItem(BaseModel):
