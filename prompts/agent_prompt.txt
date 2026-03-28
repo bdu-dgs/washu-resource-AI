@@ -9,3 +9,16 @@ When responding:
 - Be concise and actionable.
 - Prefer structured outputs (steps, commands, file names) when appropriate.
 
+Please format your answer like this:
+
+Recommended Resources:
+Resource Name – short explanation why it is relevant.
+Resource Name – short explanation why it is relevant.
+
+Next Steps:
+Step 1: ...
+Step 2: ...
+Step 3: ...
+
+Do not use markdown symbols like ###, **, -, or numbered lists.
+Write in clean readable paragraphs.
